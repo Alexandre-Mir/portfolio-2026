@@ -1,33 +1,25 @@
 # Portfólio 2026
 
-## 1. Nicho de Atuação
+## 1. Nicho de Atuação e Posicionamento
 
-**B2B SaaS focado em Ferramentas Internas e Automação de Processos.** O foco é construir soluções robustas, escaláveis e focadas na experiência do usuário empresarial, modernizando operações complexas e criando ferramentas que otimizam o fluxo de trabalho de equipes inteiras.
+**B2B SaaS focado em Ferramentas Internas e Automação de Processos.** O foco é atuar como arquiteto de soluções, construindo aplicações robustas, escaláveis e centradas na experiência do usuário empresarial. O objetivo é modernizar operações complexas e orquestrar fluxos de trabalho através de interfaces de alta performance, garantindo acessibilidade, segurança e alinhamento com métricas de negócios (Core Web Vitals e conversão).
 
 ## 2. Stack Tecnológica 2026
 
-As tecnologias centrais que dominarei e utilizarei no dia a dia da arquitetura das aplicações são:
+As tecnologias centrais utilizadas no dia a dia para garantir a entrega de sistemas sustentáveis e de nível de produção incluem:
 
-- **Linguagem Principal:** TypeScript (garantindo tipagem, segurança e manutenibilidade)
-- **Meta-framework:** Next.js (explorando App Router, SSR, e Server Actions para performance otimizada, com foco em Core Web Vitals)
-- **Integração de Inteligência Artificial:** Vercel AI SDK (para streaming de IA, interfaces fluidas e integração com modelos de linguagem de forma eficiente)
-- **Banco de Dados & BaaS:** Supabase / PostgreSQL
-- **Estilização e Acessibilidade (A11y):** Tailwind CSS + Radix UI/Shadcn. Conformidade nativa com as diretrizes de acessibilidade (WCAG), garantindo suporte a teclado, leitores de tela e aderência à Lei Europeia de Acessibilidade (EAA).
+- **Linguagem Principal:** TypeScript (garantindo segurança de tipos, prevenindo erros em tempo de execução e acelerando refatorações em integrações complexas).
+- **Meta-framework:** Next.js (explorando App Router, Renderização Híbrida/SSR, Server Actions para performance otimizada e arquitetura edge).
+- **Integração de Inteligência Artificial:** Vercel AI SDK (para orquestração de IA, processamento em streaming e criação de interfaces adaptativas que removem atritos reais do fluxo de trabalho).
+- **Banco de Dados & BaaS:** Supabase / PostgreSQL (modelagem relacional estruturada para suporte a arquiteturas multi-tenant).
+- **Estilização e Acessibilidade (A11y):** Tailwind CSS + Radix UI / Shadcn (garantindo um sistema de design consistente e estrita conformidade legal com os padrões WCAG de acessibilidade, navegação por teclado e leitores de tela).
+- **Qualidade e DevOps:** Testes automatizados (Jest/Playwright) e pipelines de CI/CD (GitHub Actions) para implementações seguras e monitoramento de performance contínuo.
 
-## 3. Práticas de Engenharia e Qualidade (DevOps & Testes)
+## 3. Proposta do Projeto Âncora
 
-Dando foco não apenas à entrega, mas à engenharia de software sustentável:
+**ProposalGen AI - Plataforma SaaS de Automação Comercial**
+Uma aplicação B2B SaaS multi-tenant desenhada para consultorias e agências. A plataforma permite o upload seguro de briefings de clientes (áudio ou texto) e, utilizando Next.js em conjunto com o Vercel AI SDK, orquestra o contexto para gerar automaticamente propostas comerciais completas (incluindo precificação estimada, cronograma e escopo).
 
-- **Testes Automatizados:** Implementação de testes unitários (Jest) e End-to-End (Cypress / Playwright) para validação dos fluxos críticos de negócio.
-- **CI/CD:** Pipelines no GitHub Actions para garantir integração e entrega contínuas, automatizando as etapas de linting, testes e deploy, gerando confiança na evolução do produto.
-
-## 4. Proposta do Projeto Âncora
-
-**ProposalGen AI - Gerador Dinâmico de Propostas Comerciais.** Uma aplicação B2B SaaS desenhada para consultorias e agências que sofrem com o tempo gasto na criação de propostas customizadas. A plataforma permitirá o upload do briefing do cliente (áudio ou texto) e, utilizando Next.js com Vercel AI SDK, irá processar o contexto e gerar automaticamente uma proposta comercial formatada, incluindo precificação estimada, cronograma sugerido e escopo do projeto. O sistema resolve o problema real da lentidão na resposta comercial, aumentando a taxa de conversão sem sacrificar a personalização.
-
-**Arquitetura, Segurança e Case de Estudo:**
-O projeto será desenvolvido com foco em requisitos empresariais reais, englobando:
-
-- **Segurança e Privacidade:** Arquitetura _multi-tenant_ e manuseio seguro de dados sensíveis empresariais. Sanitização rigorosa de inputs antes da submissão aos LLMs e proteção de endpoints utilizando autenticação robusta (OAuth/JWT e controle de acesso RBAC).
-- **Engenharia de Performance:** Otimização para LCP e INP visando retenção na experiência B2B.
-- **Mini Caso de Estudo:** Este projeto será documentado no repositório através de um _mini caso de estudo_ contendo diagramas de arquitetura, fluxos de dados e as decisões técnicas que permearam seu desenvolvimento, comprovando o domínio do ciclo completo de engenharia.
+- **Arquitetura e Segurança:** Implementação de controle de acesso baseado em funções (RBAC), autenticação robusta (JWT/OAuth) e isolamento de dados por locatário (multi-tenant), além de sanitização rigorosa de prompts para garantir a privacidade dos dados corporativos e adequação à GDPR/LGPD.
+- **Valor de Negócio:** A IA atua ativamente para reduzir o tempo de resposta comercial, resolvendo um problema mensurável sem atuar como um mero chatbot. O sistema conta com rastreabilidade nas respostas da IA, oferecendo transparência sobre como os preços e prazos foram sugeridos.
+- **Apresentação:** O projeto será documentado como um estudo de caso profissional, incluindo diagramas de arquitetura de sistema, demonstração interativa em vídeo (Loom) e métricas de desempenho (LCP/INP), provando capacidade de enviar soluções do zero para a produção.
