@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 import {
   Card,
   CardHeader,
@@ -14,11 +16,23 @@ import { Label } from "@/components/ui/label";
 import { useCompletion } from "@ai-sdk/react";
 
 export default function Home() {
+  const [copied, setCopied] = useState(false);
+
   const { completion, input, handleInputChange, handleSubmit, isLoading } =
     useCompletion({
       api: "/api/generate",
       streamProtocol: "text",
     });
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(completion);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      console.error("Falha ao copiar para a área de transferência.");
+    }
+  };
 
   return (
     <div className="dark relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-12">
@@ -164,7 +178,7 @@ export default function Home() {
             className="mt-6 animate-in fade-in slide-in-from-bottom-4 duration-500"
           >
             <Card className="border-white/10 bg-card/50 shadow-2xl shadow-black/20 backdrop-blur-xl">
-              <CardHeader>
+              <CardHeader className="flex flex-row items-center justify-between gap-4">
                 <CardTitle className="flex items-center gap-2 text-lg text-foreground">
                   <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-violet-500 to-indigo-500 text-sm">
                     ✨
@@ -177,6 +191,50 @@ export default function Home() {
                     </span>
                   )}
                 </CardTitle>
+                {!isLoading && completion && (
+                  <Button
+                    id="copy-proposal-btn"
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={handleCopy}
+                    className="shrink-0 cursor-pointer gap-1.5 border-white/10 bg-white/5 text-xs font-medium text-muted-foreground transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10 hover:text-violet-300"
+                  >
+                    {copied ? (
+                      <>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="h-4 w-4 text-emerald-400"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        <span className="text-emerald-400">Copiado!</span>
+                      </>
+                    ) : (
+                      <>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="h-4 w-4"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M15.988 3.012A2.25 2.25 0 0 0 14.25 2h-4.5A2.25 2.25 0 0 0 7.5 4.25v1.5H4.25A2.25 2.25 0 0 0 2 8v7.75A2.25 2.25 0 0 0 4.25 18h5.5A2.25 2.25 0 0 0 12 15.75v-1.5h2.75A2.25 2.25 0 0 0 17 12V5.75a2.25 2.25 0 0 0-1.012-1.738ZM10.5 4.25a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V12a.75.75 0 0 1-.75.75H12v-4.5A2.25 2.25 0 0 0 9.75 6h-1.5v-1.5a.75.75 0 0 0-.75-.75Zm-6 4a.75.75 0 0 1 .75-.75h5.25a.75.75 0 0 1 .75.75v7.5a.75.75 0 0 1-.75.75h-5.25a.75.75 0 0 1-.75-.75v-7.5Z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        Copiar Proposta
+                      </>
+                    )}
+                  </Button>
+                )}
               </CardHeader>
               <CardContent>
                 <div
@@ -191,9 +249,7 @@ export default function Home() {
                     prose-td:border-white/10
                     prose-hr:border-white/10"
                 >
-                  <div className="whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground/90">
-                    {completion}
-                  </div>
+                  <ReactMarkdown>{completion}</ReactMarkdown>
                 </div>
               </CardContent>
             </Card>
