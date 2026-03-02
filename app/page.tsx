@@ -22,6 +22,12 @@ export default function Home() {
     useCompletion({
       api: "/api/generate",
       streamProtocol: "text",
+      onError: (error) => {
+        // Exibir um alerta nativo simples quando a API retornar 500
+        alert(
+          `Ocorreu um erro: ${error.message || "Não foi possível gerar a proposta no momento."}`,
+        );
+      },
     });
 
   const handleCopy = async () => {
