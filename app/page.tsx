@@ -14,6 +14,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useCompletion } from "@ai-sdk/react";
+import Link from "next/link";
+import { History } from "lucide-react";
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
@@ -60,6 +62,20 @@ export default function Home() {
       />
 
       <div className="relative z-10 w-full max-w-2xl">
+        {/* Navigation */}
+        <div className="mb-8 flex justify-end">
+          <Link href="/historico">
+            <Button
+              variant="outline"
+              size="sm"
+              className="cursor-pointer border-white/10 bg-white/5 text-xs font-medium text-muted-foreground transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10 hover:text-violet-300"
+            >
+              <History className="mr-2 h-4 w-4" />
+              Ver Histórico
+            </Button>
+          </Link>
+        </div>
+
         {/* Logo / Brand */}
         <div className="mb-8 text-center">
           <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium tracking-wider text-muted-foreground backdrop-blur-sm">
