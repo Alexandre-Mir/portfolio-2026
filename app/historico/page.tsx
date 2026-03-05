@@ -2,6 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ArrowLeft, MessageSquare, FileText, Calendar } from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
 
 interface Proposal {
   id: string;
@@ -11,6 +12,16 @@ interface Proposal {
 }
 
 async function getProposals(): Promise<Proposal[]> {
+  // Recuperar o usuário autenticado via cookies da sessão
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return [];
+  }
+
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -21,7 +32,7 @@ async function getProposals(): Promise<Proposal[]> {
 
   try {
     const response = await fetch(
-      `${supabaseUrl}/rest/v1/proposals?select=*&order=created_at.desc`,
+      `${supabaseUrl}/rest/v1/proposals?select=*&order=created_at.desc&user_id=eq.${user.id}`,
       {
         headers: {
           apikey: supabaseKey,

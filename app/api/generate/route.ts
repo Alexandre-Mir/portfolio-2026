@@ -1,5 +1,6 @@
 import { streamText } from "ai";
 import { openai } from "@ai-sdk/openai";
+import { createClient } from "@/lib/supabase/server";
 
 export const maxDuration = 60;
 
@@ -37,6 +38,16 @@ Regras:
 export async function POST(req: Request) {
   const { prompt } = await req.json();
 
+  // Recuperar o usuário autenticado via cookies da sessão
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return new Response("Usuário não autenticado.", { status: 401 });
+  }
+
   const supabaseUrl = process.env.SUPABASE_URL;
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -64,6 +75,7 @@ export async function POST(req: Request) {
         body: JSON.stringify({
           briefing: prompt,
           session_id: sessionId,
+          user_id: user.id,
           content: null, // Será preenchido ao final do stream
         }),
       });
